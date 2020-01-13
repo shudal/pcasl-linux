@@ -1,0 +1,10 @@
+### 编译汇编代码得到.o文件
+* nasm -f object-format -d ELF_TYPE filename
+* object-format 可以是elf -> 表示linux下的
+
+### 编译c代码得到.o文件
+* gcc -m32 -c filename.c 
+* -m32这个选项让gcc产生32位相关的，没这个选项就变成x86_64相关的了
+
+### 链接目标文件
+* gcc -m32 -o outputname input1.c input2.o input3.o
