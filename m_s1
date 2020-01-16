@@ -1,0 +1,3 @@
+nasm -f elf m_arr2.asm 
+gcc -m32 -o m_arr2o.o m_arr2c.c m_arr2.o asm_io.o 
+./m_arr2o.o
