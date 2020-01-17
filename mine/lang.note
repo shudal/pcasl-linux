@@ -1,0 +1,16 @@
+### 基本指令
+##### mov dest, src
+
+```
+mov eax, 3
+mov bx, ax
+```
+
+##### add dest, src
+
+```
+add eax, 4
+add al, ah
+```
+
+#####
