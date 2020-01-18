@@ -16,6 +16,7 @@ segment .text
     global asm_float5:
     asm_float5:
         enter 28, 0
+        
         fstcw m_cw
         mov ax, m_cw
         or ax, 0c00h
@@ -34,11 +35,10 @@ segment .text
         mov dword [eax+8], 5
         mov dword pcount, 3
 
-        
         while:
             mov eax, pcount ; pcount should < maxn, (pcount start from 0)
             cmp eax, maxn
-            je endwhile
+            jge endwhile
 
             add dword altryn, 2
             mov dword i, 0
@@ -47,34 +47,30 @@ segment .text
             fild dword altryn
             fsqrt
             fistp dword n2 ; n2 = sqrt(now_try_n)
-            
             while2:
                 mov eax, i
                 cmp eax, pcount
                 jnl endwhile2 ; i should < pcount
 
-
                 mov eax, arr ; eax = arr[i]
                 mov edx, i
                 mov eax, [eax + 4*edx]
                 mov n3, eax ; n3 = arr[i]
-            
 
                 mov eax, n3 ;
                 cmp eax, n2 ; arr[i] should <= n2
+        
                 jg endwhile2
 
                 if:
                     mov eax, altryn
                     cdq
-                    mov edx, n3
-                    idiv edx
+                    idiv dword n3
                     cmp edx, 0
                     jne endif
 
                     mov dword m_flag, 0
                     mov eax, altryn
-                    call print_int
                     jmp endwhile2
                 endif:
 
@@ -94,8 +90,9 @@ segment .text
             endif2:
             jmp while
         endwhile:
-        
+
         f_end:
         fldcw m_cw
+        mov eax, pcount
         leave
         ret

@@ -10,8 +10,8 @@ int main() {
     int* a = calloc(sizeof(int), max);
     if (a) {
         asm_float5(a, max);
-        for (int i=0; i<max; ++i)
+        int i;
+        for (i=0; i<max; ++i)
             printf("%3d %d\n", i+1, a[i]);
-        free(a);
     }
 }
